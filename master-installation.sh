@@ -5,6 +5,9 @@ echo "Installing Applications:"
 . ./install-stow.sh
 . ./install-zen.sh
 . ./install-keeper.sh
+. ./install-yazi.sh
+. ./install-fzf.sh
+. ./install-7zip.sh
 
 # Run this before Dotfiles, otherwise directory changes
 echo "Adopting Omarchy overrides:"
