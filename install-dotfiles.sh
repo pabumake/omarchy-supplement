@@ -27,10 +27,11 @@ if [ $? -eq 0 ]; then
   echo "removing old configs"
   # Adjust to configs we will build later.
   # rm -rf ~/.config/nvim ~/.config/starship.toml ~/.local/share/nvim/ ~/.cache/nvim/ ~/.config/ghostty/config
+  rm ~/.config/starship.toml
 
   cd "$REPO_NAME"
   #stow zshrc
-  stow ghostty
+  #stow ghostty
   #stow tmux
   #stow nvim
   stow starship
