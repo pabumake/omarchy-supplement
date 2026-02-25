@@ -3,8 +3,8 @@
 set -eu
 
 PROJECT_ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
-PACKAGE_MANIFEST="${PACKAGE_MANIFEST:-$PROJECT_ROOT/cfg/pup-remove.packages.txt}"
-WEBAPP_MANIFEST="${WEBAPP_MANIFEST:-$PROJECT_ROOT/cfg/pup-remove.webapps.txt}"
+PACKAGE_MANIFEST="${PACKAGE_MANIFEST:-$PROJECT_ROOT/application/application.general.pup-remove.packages.txt}"
+WEBAPP_MANIFEST="${WEBAPP_MANIFEST:-$PROJECT_ROOT/application/application.general.pup-remove.webapps.txt}"
 DESKTOP_DIR="$HOME/.local/share/applications"
 ICON_DIR="$DESKTOP_DIR/icons"
 

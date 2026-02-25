@@ -6,3 +6,5 @@ yazi
 fzf
 keeper-password-manager
 visual-studio-code-bin
+podman
+podman-compose

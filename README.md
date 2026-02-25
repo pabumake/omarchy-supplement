@@ -4,8 +4,8 @@ Profile-driven setup for Omarchy/Arch machines.
 
 ## Repository Layout
 
-- `application/`: profile manifests only (`application.<profile>.txt`)
-- `cfg/`: static config assets used by configuration scripts
+- `application/`: profile package manifests and profile auxiliary manifests
+- `cfg/`: static system config assets (for example Hyprland overrides, BlackArch bundle mappings)
 - `configuration/`: post-install tweaks (`configure.<profile>.sh`, helper config scripts, and `configure.<profile>.app.<app>.sh`)
 - `helper/`: shared setup/runtime helpers
 
@@ -34,6 +34,12 @@ Supported flags:
 
 1. `./setup-general.sh`
 2. `./setup-work.sh`
+
+Work profile package set includes:
+
+- `microsoft-edge-stable-bin`
+- `teams-for-linux-bin`
+- `outlook-for-linux-bin`
 
 ## Recommended Security Flow
 
@@ -67,6 +73,25 @@ Example:
 1. Add package name to `application/application.<profile>.txt`
 2. Optional: add `configuration/configure.<profile>.app.<package>.sh` for app-specific post-install tweaks
 
+## Webapp Manifests
+
+Webapps are profile-driven from `application/application.<profile>.webapps.txt` files with this format:
+
+- `Name|URL|IconURL`
+
+Current webapp manifests:
+
+- `application/application.general.webapps.txt`
+- `application/application.work.webapps.txt`
+
+`configuration/configure.work.webapps.sh` installs these wrappers via `omarchy-webapp-install`.
+
+For compatibility, `Word` and `Excel` launchers are rewritten to force Microsoft Edge app-mode:
+
+- `Exec=<edge-executable> --app=<url>`
+
+If Edge cannot be resolved during a real run, work webapp configuration fails with an actionable message to install `microsoft-edge-stable-bin`.
+
 ## Pup Uninstall (General Debloat)
 
 `general` includes an idempotent debloat step:
@@ -75,8 +100,8 @@ Example:
 
 This script removes unwanted Omarchy defaults using static manifests:
 
-- `cfg/pup-remove.packages.txt`
-- `cfg/pup-remove.webapps.txt`
+- `application/application.general.pup-remove.packages.txt`
+- `application/application.general.pup-remove.webapps.txt`
 
 Rules:
 

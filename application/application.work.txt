@@ -1,2 +1,3 @@
-# Work profile scaffold.
-# Add one package per line.
+microsoft-edge-stable-bin
+teams-for-linux-bin
+outlook-for-linux-bin

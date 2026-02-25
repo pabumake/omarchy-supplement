@@ -1,0 +1,2 @@
+# format: Name|URL|IconURL
+Apple Music|https://music.apple.com/de/home|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/apple-music.png
