@@ -92,6 +92,27 @@ For compatibility, `Word` and `Excel` launchers are rewritten to force Microsoft
 
 If Edge cannot be resolved during a real run, work webapp configuration fails with an actionable message to install `microsoft-edge-stable-bin`.
 
+## Default Wallpaper (General)
+
+`general` includes wallpaper setup via:
+
+- `configuration/configure.general.wallpaper.sh`
+
+Behavior:
+
+- Downloads default wallpaper (if missing) from:
+  - `https://raw.githubusercontent.com/pabumake/catpucchin-latte-wallpapers/main/wallpaper/catpucchin-dark-omarchy-label.jpg`
+- Stores it at:
+  - `~/.config/omarchy/backgrounds/custom/catpucchin-dark-omarchy-label.jpg`
+- Updates Omarchy background symlink:
+  - `~/.config/omarchy/current/background`
+
+Notes:
+
+- This is a one-time default apply and does not force wallpaper on every login.
+- Download failure is non-fatal by default (warn and continue).
+- `hyprland-overrides.conf` is not used for wallpaper downloading in this mode.
+
 ## Pup Uninstall (General Debloat)
 
 `general` includes an idempotent debloat step:
