@@ -28,6 +28,10 @@ Supported flags:
 - `--dry-run`
 - `--apps-only`
 - `--skip-config`
+- `--uninstall`
+- `--import-current-state` (requires `--uninstall`)
+- `--state-file <path>`
+- `--preset <basic|standard|full>` (security profile only)
 - `--help`
 
 ## Recommended Work Machine Flow
@@ -45,6 +49,12 @@ Work profile package set includes:
 
 1. `./setup-general.sh`
 2. `./setup-security.sh`
+
+Security preset examples:
+
+- `./setup-security.sh` (defaults to `standard`)
+- `./setup-security.sh --preset basic`
+- `./setup-security.sh --preset full`
 
 ## Configuration Naming Convention
 
@@ -151,7 +161,10 @@ rg "\[PACMAN\] Running 'pacman -R" /var/log/pacman.log
 `setup-security.sh` performs:
 
 1. Security pre-bootstrap to configure BlackArch repository (`configuration/configure.security.blackarch.sh`)
-2. Security installs from `application/application.security.txt`
+2. Security installs from preset manifests:
+   - `application/application.security.basic.txt`
+   - `application/application.security.standard.txt` (default)
+   - `application/application.security.full.txt`
 3. Security configuration scripts
 
 Security manifest token types:
@@ -166,17 +179,79 @@ Security installs use:
   - `sudo pacman -S --needed --noconfirm <package...>`
 - `SECURITY_INSTALL_MODE=legacy-groups` keeps direct group installs (may become interactive)
 
+Security preset intent:
+
+- `basic`: lean baseline (`bundle-security-basic`)
+- `standard`: recommended baseline (`bundle-security-standard`)
+- `full`: full pentester stack (`bundle-security-full`)
+
 Notes:
 
 - `security` is delta-only; run `setup-general.sh` first.
 - BlackArch `strap.sh` is checksum-verified against the checksum parsed from `https://blackarch.org/downloads.html`.
 - Package-level install failures are retried with provider defaults when possible (for example `tessdata -> tesseract-data-eng`), then skipped with a warning summary.
+- Security package installation streams pacman output live; after the first sudo password prompt, output continues in real time.
+- Compatibility alias: `bundle-kali-core` maps to the same targets as `bundle-security-full`.
 
 Troubleshooting:
 
 - If some security packages cannot be installed due to stale/broken repo dependencies, setup continues and prints:
   - `Security install summary: ... failed=<n> retries=<n>`
   - `Security packages skipped after retries: <package list>`
+- Blank output after the sudo prompt should no longer occur during chunk installs.
+
+## Intelligent Uninstall
+
+All setup entrypoints support uninstall mode:
+
+- `./setup-general.sh --uninstall`
+- `./setup-work.sh --uninstall`
+- `./setup-security.sh --uninstall --preset full`
+
+Uninstall behavior:
+
+- Removes only packages tracked as installed/imported by this tool for the selected profile/preset.
+- Uses dependency-aware remove ordering.
+- Continues on package-level removal failures and prints a summary.
+- Keeps pup-specific debloat (`configure.general.pup-uninstall.sh`) separate.
+
+State ledger:
+
+- Default path: `~/.local/state/omarchy-supplement/install-state.tsv`
+- Override with: `--state-file <path>`
+- Format:
+  - `package<TAB>profile<TAB>preset<TAB>timestamp<TAB>source_manifest<TAB>status`
+  - `status` values: `installed`, `imported`, `removed`
+
+Bootstrap import for existing systems (installed before tracking existed):
+
+- `./setup-security.sh --uninstall --import-current-state --preset full`
+- `./setup-general.sh --uninstall --import-current-state`
+
+Dry-run examples:
+
+- `./setup-security.sh --uninstall --preset full --dry-run`
+- `./setup-general.sh --uninstall --dry-run`
+
+## Security Downgrade
+
+Downgrade mode is available for security presets only:
+
+- `./setup-security.sh --downgrade-from full --downgrade-to basic --dry-run`
+- `./setup-security.sh --downgrade-from full --downgrade-to standard`
+- Optional target install step:
+  - `./setup-security.sh --downgrade-from full --downgrade-to basic --apply-target`
+
+Downgrade semantics:
+
+- Keeps packages shared by source/target presets.
+- Removes only source-only packages that are tracked in state for the source preset.
+- By default, does not install target preset packages (`remove-only delta`).
+- `--apply-target` installs missing target packages and records them as `installed` under the target preset.
+
+Prerequisite for systems installed before tracking:
+
+- `./setup-security.sh --uninstall --import-current-state --preset full`
 
 ## Breaking Changes
 

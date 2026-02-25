@@ -3,8 +3,11 @@
 # 1) Bundle aliases from cfg/blackarch-bundles.conf
 # 2) Direct BlackArch groups (blackarch-*)
 # Comments and blank lines are ignored.
+# Default preset mapping:
+# - setup-security.sh defaults to application.security.standard.txt
+# - use --preset full for full pentester setup
 
-bundle-kali-core
+bundle-security-standard
 
 # Example direct groups (optional):
 # blackarch-recon

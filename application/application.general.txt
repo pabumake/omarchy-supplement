@@ -11,3 +11,6 @@ visual-studio-code-bin
 podman
 podman-compose
 remmina
+openvpn
+waybar
+jq

@@ -1,0 +1,7 @@
+# Security profile preset: basic (lean baseline)
+# Supported token types:
+# 1) Bundle aliases from cfg/blackarch-bundles.conf
+# 2) Direct BlackArch groups (blackarch-*)
+# Comments and blank lines are ignored.
+
+bundle-security-basic
