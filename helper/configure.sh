@@ -30,9 +30,9 @@ run_configuration_script() {
   log_info "Running configuration script: $script_path"
 
   if [ -x "$script_path" ]; then
-    run_cmd "$script_path"
+    DRY_RUN="${DRY_RUN:-0}" "$script_path"
   else
-    run_cmd sh "$script_path"
+    DRY_RUN="${DRY_RUN:-0}" sh "$script_path"
   fi
 }
 

@@ -62,6 +62,7 @@ Execution behavior:
 3. Run app scripts in lexical order
 4. Run an app script only when `<app>` exists as an exact token in `application/application.<profile>.txt`
 5. Unknown app scripts are skipped with a log message
+6. During `--dry-run`, configuration scripts are still executed with `DRY_RUN=1` for full visibility.
 
 Example:
 
@@ -131,6 +132,8 @@ Rules:
   - `omarchy-launch-webapp`
   - `omarchy-webapp-handler`
 - Non-wrapper desktop entries are skipped for safety.
+- In `general` configuration discovery, pup uninstall is executed first.
+- The script prints a final summary with removal/skip counters.
 
 Notes:
 
@@ -158,12 +161,22 @@ Security manifest token types:
 
 Security installs use:
 
-- `sudo pacman -S --needed --noconfirm <blackarch-group>`
+- default mode: resolve `blackarch-*` groups to concrete package members, then install packages in non-interactive batches
+- package installs use:
+  - `sudo pacman -S --needed --noconfirm <package...>`
+- `SECURITY_INSTALL_MODE=legacy-groups` keeps direct group installs (may become interactive)
 
 Notes:
 
 - `security` is delta-only; run `setup-general.sh` first.
 - BlackArch `strap.sh` is checksum-verified against the checksum parsed from `https://blackarch.org/downloads.html`.
+- Package-level install failures are retried with provider defaults when possible (for example `tessdata -> tesseract-data-eng`), then skipped with a warning summary.
+
+Troubleshooting:
+
+- If some security packages cannot be installed due to stale/broken repo dependencies, setup continues and prints:
+  - `Security install summary: ... failed=<n> retries=<n>`
+  - `Security packages skipped after retries: <package list>`
 
 ## Breaking Changes
 
