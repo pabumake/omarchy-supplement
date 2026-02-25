@@ -13,3 +13,6 @@ HEY
 WhatsApp
 X
 Zoom
+YouTube
+Discord
+ChatGPT
