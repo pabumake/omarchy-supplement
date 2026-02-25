@@ -1,3 +1,5 @@
+# Comments and blank lines are ignored.
+
 nano
 7zip
 zen-browser-bin

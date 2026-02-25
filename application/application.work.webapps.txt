@@ -1,3 +1,4 @@
+# Comments and blank lines are ignored.
 # format: Name|URL|IconURL
 Microsoft Word Cloud|https://word.cloud.microsoft|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-word.png
 Microsoft Excel Cloud|https://exce.cloud.microsoft|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-excel.png

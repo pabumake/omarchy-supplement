@@ -1,3 +1,5 @@
+# Comments and blank lines are ignored.
+
 microsoft-edge-stable-bin
 teams-for-linux-bin
 outlook-for-linux-bin
