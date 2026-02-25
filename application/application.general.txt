@@ -5,3 +5,4 @@ stow
 yazi
 fzf
 keeper-password-manager
+visual-studio-code-bin
