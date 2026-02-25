@@ -4,7 +4,6 @@
 # 2) Direct BlackArch groups (blackarch-*)
 # Comments and blank lines are ignored.
 
-
 bundle-kali-core
 
 # Example direct groups (optional):
