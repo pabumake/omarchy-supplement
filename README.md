@@ -45,9 +45,12 @@ Supported flags:
 Execution behavior:
 
 1. Run base script first (if present)
-2. Run app scripts in lexical order
-3. Run an app script only when `<app>` exists as an exact token in `application/application.<profile>.txt`
-4. Unknown app scripts are skipped with a log message
+2. Base profile scripts auto-discover and run `configure.<profile>.*.sh` scripts except:
+   - `configure.<profile>.sh` itself
+   - `configure.<profile>.app.*.sh` app-gated scripts
+3. Run app scripts in lexical order
+4. Run an app script only when `<app>` exists as an exact token in `application/application.<profile>.txt`
+5. Unknown app scripts are skipped with a log message
 
 Example:
 
