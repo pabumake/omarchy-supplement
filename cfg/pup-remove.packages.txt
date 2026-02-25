@@ -1,0 +1,12 @@
+# Remove unwanted Omarchy-root packages (one package per line).
+# Comments and blank lines are ignored.
+
+docker
+docker-buildx
+docker-compose
+1password-cli
+1password-beta
+alacritty
+lazydocker
+ufw-docker
+omarchy-chromium

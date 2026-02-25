@@ -67,6 +67,36 @@ Example:
 1. Add package name to `application/application.<profile>.txt`
 2. Optional: add `configuration/configure.<profile>.app.<package>.sh` for app-specific post-install tweaks
 
+## Pup Uninstall (General Debloat)
+
+`general` includes an idempotent debloat step:
+
+- `configuration/configure.general.pup-uninstall.sh`
+
+This script removes unwanted Omarchy defaults using static manifests:
+
+- `cfg/pup-remove.packages.txt`
+- `cfg/pup-remove.webapps.txt`
+
+Rules:
+
+- Package removals only run when package is installed.
+- Webapp removal only runs when desktop entry exists and `Exec=` contains:
+  - `omarchy-launch-webapp`
+  - `omarchy-webapp-handler`
+- Non-wrapper desktop entries are skipped for safety.
+
+Notes:
+
+- AUR-installed packages can be removed with pacman because installed artifacts are pacman-managed.
+- Keep pup manifests curated and explicit; runtime log parsing is intentionally not used.
+
+Optional maintenance command to review manual removals:
+
+```bash
+rg "\[PACMAN\] Running 'pacman -R" /var/log/pacman.log
+```
+
 ## Security Profile (BlackArch)
 
 `setup-security.sh` performs:

@@ -1,0 +1,15 @@
+# Remove unwanted Omarchy webapp wrappers (one app name per line).
+# Names must match "~/.local/share/applications/<Name>.desktop".
+# Comments and blank lines are ignored.
+
+Basecamp
+Figma
+Fizzy
+Google Contacts
+Google Maps
+Google Messages
+Google Photos
+HEY
+WhatsApp
+X
+Zoom
