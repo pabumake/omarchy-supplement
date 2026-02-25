@@ -1,0 +1,7 @@
+nano
+7zip
+zen-browser-bin
+stow
+yazi
+fzf
+keeper-password-manager

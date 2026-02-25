@@ -1,0 +1,2 @@
+# Security profile scaffold.
+# Add one package per line when security tooling is defined.
