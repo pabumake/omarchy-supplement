@@ -1,2 +1,10 @@
-# Security profile scaffold.
-# Add one package per line when security tooling is defined.
+# Security profile (BlackArch-on-Omarchy), delta on top of setup-general.sh
+# Supported token types:
+# 1) Bundle aliases from cfg/blackarch-bundles.conf
+# 2) Direct BlackArch groups (blackarch-*)
+
+bundle-kali-core
+
+# Example direct groups (optional):
+# blackarch-recon
+# blackarch-webapp

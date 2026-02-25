@@ -77,3 +77,11 @@ preflight_arch_omarchy() {
   require_cmd grep
   require_cmd awk
 }
+
+preflight_security_requirements() {
+  log_info "Running security profile preflight checks"
+  require_cmd curl
+  require_cmd sha1sum
+  require_cmd sed
+  require_cmd sudo
+}

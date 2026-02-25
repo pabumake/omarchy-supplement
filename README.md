@@ -13,7 +13,7 @@ Profile-driven setup for Omarchy/Arch machines.
 
 - `general`: baseline for all machines
 - `work`: work-only delta profile (does not include `general`)
-- `security`: placeholder profile (no apps/tweaks defined yet)
+- `security`: BlackArch-on-Omarchy delta profile (run after `general`)
 
 ## Entrypoints
 
@@ -34,6 +34,11 @@ Supported flags:
 
 1. `./setup-general.sh`
 2. `./setup-work.sh`
+
+## Recommended Security Flow
+
+1. `./setup-general.sh`
+2. `./setup-security.sh`
 
 ## Configuration Naming Convention
 
@@ -62,9 +67,27 @@ Example:
 1. Add package name to `application/application.<profile>.txt`
 2. Optional: add `configuration/configure.<profile>.app.<package>.sh` for app-specific post-install tweaks
 
-## Security Placeholder
+## Security Profile (BlackArch)
 
-`setup-security.sh` currently runs against placeholder files and exits successfully with clear messaging. Populate `application/application.security.txt` and add security config scripts when ready.
+`setup-security.sh` performs:
+
+1. Security pre-bootstrap to configure BlackArch repository (`configuration/configure.security.blackarch.sh`)
+2. Security installs from `application/application.security.txt`
+3. Security configuration scripts
+
+Security manifest token types:
+
+- `bundle-*`: alias resolved from `cfg/blackarch-bundles.conf`
+- `blackarch-*`: direct BlackArch group
+
+Security installs use:
+
+- `sudo pacman -S --needed --noconfirm <blackarch-group>`
+
+Notes:
+
+- `security` is delta-only; run `setup-general.sh` first.
+- BlackArch `strap.sh` is checksum-verified against the checksum parsed from `https://blackarch.org/downloads.html`.
 
 ## Breaking Changes
 

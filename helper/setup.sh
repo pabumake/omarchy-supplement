@@ -3,6 +3,7 @@
 . "$PROJECT_ROOT/helper/common.sh"
 . "$PROJECT_ROOT/helper/applications.sh"
 . "$PROJECT_ROOT/helper/configure.sh"
+. "$PROJECT_ROOT/helper/security.sh"
 
 detect_profile_from_entrypoint() {
   entrypoint_path="$1"
@@ -91,6 +92,11 @@ run_setup_from_entrypoint() {
   fi
 
   preflight_arch_omarchy
+  if [ "$PROFILE" = "security" ]; then
+    preflight_security_requirements
+    security_prebootstrap_blackarch "$PROJECT_ROOT"
+  fi
+
   require_readable_file "$MANIFEST_FILE"
   if [ "$SKIP_CONFIG" -eq 0 ]; then
     require_profile_configuration_scripts "$PROFILE" "$CONFIG_DIR"
