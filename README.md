@@ -84,6 +84,31 @@ Example:
 1. Add package name to `application/application.<profile>.txt`
 2. Optional: add `configuration/configure.<profile>.app.<package>.sh` for app-specific post-install tweaks
 
+## Custom Installer Manifests
+
+For tools that are not installed from package manifests, use profile installer manifests with this format:
+
+- `Name|ProbeCommand|InstallerURL`
+
+Current custom installer manifest:
+
+- `application/application.general.installers.txt`
+
+Execution behavior (`configuration/configure.general.installers.sh`):
+
+1. Skip entry when `ProbeCommand` already exists in `PATH`
+2. Otherwise run installer via:
+   - `curl -fsSL <InstallerURL> | bash`
+3. In `--dry-run`, print the installer command without executing it
+
+Current `general` entry:
+
+- `gh-manager` via `https://raw.githubusercontent.com/pabumake/gh-manager/main/scripts/install.sh`
+
+Related package dependency for this workflow:
+
+- `github-cli` is installed from `application/application.general.txt`
+
 ## Webapp Manifests
 
 Webapps are profile-driven from `application/application.<profile>.webapps.txt` files with this format:

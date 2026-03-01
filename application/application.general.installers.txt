@@ -1,0 +1,4 @@
+# Custom installers for tools not shipped via package manifests.
+# Format: Name|ProbeCommand|InstallerURL
+
+gh-manager|gh-manager|https://raw.githubusercontent.com/pabumake/gh-manager/main/scripts/install.sh

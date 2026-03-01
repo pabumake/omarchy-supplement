@@ -14,5 +14,6 @@ remmina
 openvpn
 waybar
 jq
+github-cli
 opencode-bin
 ansible
