@@ -14,3 +14,4 @@ remmina
 openvpn
 waybar
 jq
+opencode-bin
