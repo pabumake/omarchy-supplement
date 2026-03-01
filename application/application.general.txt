@@ -15,3 +15,4 @@ openvpn
 waybar
 jq
 opencode-bin
+ansible
